@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Game Catalog";
+}
+
+@model List<HSProjectMVC.Models.VideoGameModel>
+
+<div class="jumbotron">
+    <h1>Games "R" Us</h1>
+    <p class="lead">Browse our game library!!</p>
+</div>
+
+<div>
+    <table class="table">
+        <tr> 
+            @foreach (var row in Model)
+            {
+                var gameImage = Url.Content("~/Images/" + @row.CoverArt);
+                <td class="left">
+                    <img src="@gameImage">
+                    <table class="table">
+                        <tr>
+                            <td><strong>Title:</strong></td>
+                            <td>@row.GameName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>System:</strong></td>
+                            <td>@row.Systems</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Price:</strong></td>
+                            <td>@string.Format("{0:c}", row.Price)</td>
+                        </tr>
+                        <tr>
+                            
+                            <td><strong>Publisher:</strong></td>
+                            <td>@row.Publisher</td>
+                        </tr>
+                    </table>
+                    <a href="@Url.Action("Index", "Home", new { addItem = @row.Id })" class="btn btn-primary btn-lg">Add to Cart</a>
+                </td>
+            }
+            
+        </tr>
+    </table>
+</div>

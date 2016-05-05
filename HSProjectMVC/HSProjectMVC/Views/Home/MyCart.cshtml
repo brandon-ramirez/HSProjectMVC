@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Cart";
+}
+
+@model List<HSProjectMVC.Models.CartItemModel>
+<h2>@ViewBag.Title.</h2>
+
+<div>
+    <div>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Game Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+                @foreach (var row in Model)
+                {
+                    var gameImage = Url.Content("~/Images/" + @row.CoverArt);
+                    <tr class="left">
+                        <td><img src="@gameImage"></td>
+                        <td>@row.GameName</td>
+                        <td>@string.Format("{0:c}", row.Price)</td>
+                        <td>@Html.TextBox("Quantity", row.Quantity.ToString())</td>
+                        <td>@Html.ActionLink("Delete", "Delete", new { id = row.CartItemID })</td>   
+                    </tr>
+                }
+        </table>
+    </div>
